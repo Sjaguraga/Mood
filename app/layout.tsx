@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const roboto = Roboto({ weight: "300", subsets: ["latin"] });
 
@@ -14,8 +15,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={roboto.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={roboto.className}>
+          <main className="w-full flex items-center justify-center h-screen">
+            {children}
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
